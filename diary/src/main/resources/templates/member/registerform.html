@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-<form th:action="@{/member/login}" th:object="${registration}" method="post">
+<form th:action="@{/member/register}" th:object="${Member}" method="post">
 <table>
 	  <tr>
 	    <td th:text="Name"></td>
@@ -25,9 +25,7 @@
 	   	<td><input th:field="*{user_password}" type="password"></td>
 	  </tr>
 	  <tr>
-	  	<td><input type="submit" value="로그인"><br/>
-	  	<input type="button" onclick="location='/member/findid'" value="아이디 찾기"/>
-	  	<input type="button" onclick="location='/member/registerform'" value="회원가입"/></td>
+	  	<td><input type="submit" value="register"><br/><input type="button" onclick="location='/member/findid'" value="아이디 찾기"/></td>
 	  </tr>
 </table>
 </form>

@@ -5,7 +5,7 @@
  
 <mapper namespace="com.example.demo.Mapper.DiaryMapper">
 	<insert id="insertDiary">
-		INSERT INTO diary (null, #{user_id}, #{title}, #{content}, SYSTDATE())
+		INSERT INTO diary value(null, #{user_id}, #{title}, #{content}, SYSTDATE())
 	</insert>
 	<select id="getDiary" resultType="Member">
 		SELECT #{board_id},#{user_id},#{title},#{content},#{create_at}
