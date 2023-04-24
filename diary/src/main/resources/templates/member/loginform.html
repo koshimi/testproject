@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+<form th:action="@{/member/login}" th:object="${registration}" method="post">
+<table>
+	  <tr>
+	    <td th:text="Name"></td>
+	   	<td><input th:field="*{nickname}" type="text"></td>
+	  </tr>
+	  <tr>
+	    <td th:text="Email"></td>
+	   	<td><input th:field="*{email}" type="email"></td>
+	  </tr>
+	  <tr>
+	    <td th:text="ID"></td>
+	   	<td><input th:field="*{user_id}" type="text"></td>
+	  </tr>
+	  <tr>
+	    <td th:text="Password"></td>
+	   	<td><input th:field="*{user_password}" type="password"></td>
+	  </tr>
+	  <tr>
+	  	<td><input type="submit" value="로그인"><br/><input type="button" onclick="location='/member/findid'" value="아이디 찾기"/></td>
+	  </tr>
+</table>
+</form>
+</div>
+
+
+</body>
+</html>
