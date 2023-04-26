@@ -6,16 +6,8 @@
 </head>
 <body>
 <div>
-<form th:action="@{/member/login}" th:object="${registration}" method="post">
+<form th:action="@{/member/login}" th:object="${Member}" method="post">
 <table>
-	  <tr>
-	    <td th:text="Name"></td>
-	   	<td><input th:field="*{nickname}" type="text"></td>
-	  </tr>
-	  <tr>
-	    <td th:text="Email"></td>
-	   	<td><input th:field="*{email}" type="email"></td>
-	  </tr>
 	  <tr>
 	    <td th:text="ID"></td>
 	   	<td><input th:field="*{user_id}" type="text"></td>

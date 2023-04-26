@@ -3,29 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.4.js" 
+	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" 
+	crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+	$(function() {
+		$("button").click(function() {
+			let id = this.id;
+			let d;
+			if (id == 'n') {
+				d = $("#nickname").val();
+			} else {
+				d = $("#email").val();
+			}
+			const da = {
+				"id" : id,
+				"data" : d
+			};
+		    $.get("/member/isDuplicated", da ,function(data, status){
+			if (data == "duplicated") {
+			  if (id == 'n') {
+				  $("#ncheck").text("this nickname is duplicated");
+			  } else {
+					  $("#echeck").text("this email is duplicated");
+				  }
+				} else {
+				  if (id == 'n') {
+					  $("#ncheck").text("OK");
+				  } else {
+					  $("#echeck").text("OK");
+				  }
+				}
+			  });
+		});
+	});
+	
+</script>
 </head>
 <body>
 <div>
-<form th:action="@{/member/register}" th:object="${Member}" method="post">
+<form th:action="@{/member/register}" th:object="${member}" method="post">
 <table>
 	  <tr>
-	    <td th:text="Name"></td>
-	   	<td><input th:field="*{nickname}" type="text"></td>
+	    <td th:text="Nickname"></td>
+	   	<td><input th:field="*{nickname}" type="text" id="nickname"></td>
+	   	<td><button id="n" type="button">중복체크</button></td>
+	   	<td><span id="ncheck"></span></td>
+	   	<td th:if="${#fields.hasErrors('nickname')}" 
+	   	th:errors="*{nickname}"></td>
 	  </tr>
 	  <tr>
 	    <td th:text="Email"></td>
-	   	<td><input th:field="*{email}" type="email"></td>
+	   	<td><input th:field="*{email}" type="email" id="email"></td>
+	   	<td><button id="e" type="button">중복체크</button></td>
+	   	<td><span id="echeck"></span></td>
+	   	<td><div th:if="${#fields.hasErrors('email')}" 
+	   	th:errors="*{email}"></div></td>
 	  </tr>
 	  <tr>
 	    <td th:text="ID"></td>
 	   	<td><input th:field="*{user_id}" type="text"></td>
+	   	<td><div th:if="${#fields.hasErrors('user_id')}" 
+	   	th:errors="*{user_id}"></div></td>
 	  </tr>
 	  <tr>
 	    <td th:text="Password"></td>
 	   	<td><input th:field="*{user_password}" type="password"></td>
+	   	<td><div th:if="${#fields.hasErrors('user_password')}" 
+	   	th:errors="*{user_password}"></div></td>
 	  </tr>
 	  <tr>
 	  	<td><input type="submit" value="register"><br/><input type="button" onclick="location='/member/findid'" value="아이디 찾기"/></td>
+	  	<td><input type="button" value="로그인" onclick="location.href='/member/loginform'"/></td>
 	  </tr>
 </table>
 </form>

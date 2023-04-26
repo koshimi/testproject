@@ -5,7 +5,19 @@
 
 <mapper namespace="com.example.demo.member.MemberMapper">
 	<insert id="registerUser" parameterType="Member">
-		INSERT INTO member value(#{email} , #{nickname}, #{user_id}, #{user_password}, SYSTDATE())
+		INSERT INTO member value(#{nickname},#{email} ,#{user_id}, #{user_password}, SYSDATE())
 	</insert>
+	
+	<select id="isDuplicated" resultType="Data">
+	<if test="id == 'n'">
+		SELECT nickname FROM member
+		where nickname == #{data}
+	</if>
+
+	<if test="id == 'e'">
+		SELECT email FROM member
+		where email == #{data}
+	</if>
+	</select>
 
 </mapper>
