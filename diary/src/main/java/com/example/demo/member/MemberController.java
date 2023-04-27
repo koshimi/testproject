@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -27,14 +28,18 @@ public class MemberController {
 
 	
 	@PostMapping("/member/login")
-	public String login(Member member) {
-		var isMember = mapper.login(member.getUser_id());
+	public String login(Member member, Model model) {
+		member = mapper.login(member);
+		if (member == null) {
+			return "redirect:/member/loginform";
+		}
+		
 		return "board/menu";
 	}
 	
 	@GetMapping("/member/registerform")
 	public String registerform(Model model) {
-		model.addAttribute("member", new Member());
+		model.addAttribute("MemberRegister", new Member());
 		return "member/registerform";
 	}
 	
@@ -45,17 +50,22 @@ public class MemberController {
 			model.addAttribute("Member",member);
 			return "member/registerform";
 		} else {
-			mapper.registerUser(member);
-			return "index";
+			if (0 < mapper.registerUser(member)) {
+				return "index";
+			} else {
+				return "index";
+			}
 		}
 	}
 	
 	@GetMapping("/member/isDuplicated")
-	@ResponseBody
-	public String isDuplicated(NickOrEmail data) {	
-		var bDuplicated = mapper.isDuplicated(data).getData();
-		System.out.println(bDuplicated);
-		
-		return "duplicated";
+	@ResponseBody	
+	public String isDuplicated(NickOrEmail value) {	
+		var bDuplicated = mapper.isDuplicated(value);
+		if (bDuplicated != null) {
+			System.out.println(bDuplicated);
+			return "duplicated";
+		} 
+		return "ok";
 	}
 }

@@ -8,47 +8,38 @@
 	crossorigin="anonymous">
 </script>
 <script type="text/javascript">
-	$(function() {
-		$("button").click(function() {
-			let id = this.id;
-			let d;
-			if (id == 'n') {
-				d = $("#nickname").val();
+	function checkDuplication(id, btn) {
+		let value;
+		if (id == "nickname") {
+			value = $("#nickname").val();
+		} else if (id == "email"){
+			value = $("#email").val();
+		} else {
+			value = $("#id").val();
+		}
+		let d = {
+			"nickOrEmailOrId": id,
+			"data": value
+		}
+		$.get("/member/isDuplicated", d, function(data){
+			if(data == "ok") {
+				$(btn).addClass("checked");
+				alert(value + " is useable " + id);
 			} else {
-				d = $("#email").val();
+				alert(value + " is not useable " + id);
 			}
-			const da = {
-				"id" : id,
-				"data" : d
-			};
-		    $.get("/member/isDuplicated", da ,function(data, status){
-			if (data == "duplicated") {
-			  if (id == 'n') {
-				  $("#ncheck").text("this nickname is duplicated");
-			  } else {
-					  $("#echeck").text("this email is duplicated");
-				  }
-				} else {
-				  if (id == 'n') {
-					  $("#ncheck").text("OK");
-				  } else {
-					  $("#echeck").text("OK");
-				  }
-				}
-			  });
 		});
-	});
-	
+	}
 </script>
 </head>
 <body>
 <div>
-<form th:action="@{/member/register}" th:object="${member}" method="post">
+<form th:action="@{/member/register}" th:object="${MemberRegister}" method="post">
 <table>
 	  <tr>
 	    <td th:text="Nickname"></td>
 	   	<td><input th:field="*{nickname}" type="text" id="nickname"></td>
-	   	<td><button id="n" type="button">중복체크</button></td>
+	   	<td><button id="n" type="button" onclick="checkDuplication('nickname', this)">중복체크</button></td>
 	   	<td><span id="ncheck"></span></td>
 	   	<td th:if="${#fields.hasErrors('nickname')}" 
 	   	th:errors="*{nickname}"></td>
@@ -56,14 +47,15 @@
 	  <tr>
 	    <td th:text="Email"></td>
 	   	<td><input th:field="*{email}" type="email" id="email"></td>
-	   	<td><button id="e" type="button">중복체크</button></td>
+	   	<td><button id="e" type="button" onclick="checkDuplication('email', this)">중복체크</button></td>
 	   	<td><span id="echeck"></span></td>
 	   	<td><div th:if="${#fields.hasErrors('email')}" 
 	   	th:errors="*{email}"></div></td>
 	  </tr>
 	  <tr>
 	    <td th:text="ID"></td>
-	   	<td><input th:field="*{user_id}" type="text"></td>
+	   	<td><input id="id" th:field="*{user_id}" type="text"></td>
+	   	<td><button type="button" onclick="checkDuplication('user_id', this)">중복체크</button></td>
 	   	<td><div th:if="${#fields.hasErrors('user_id')}" 
 	   	th:errors="*{user_id}"></div></td>
 	  </tr>

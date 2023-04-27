@@ -3,10 +3,8 @@ package com.example.demo.member;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data

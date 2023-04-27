@@ -8,16 +8,12 @@
 		INSERT INTO member value(#{nickname},#{email} ,#{user_id}, #{user_password}, SYSDATE())
 	</insert>
 	
-	<select id="isDuplicated" resultType="Data">
-	<if test="id == 'n'">
-		SELECT nickname FROM member
-		where nickname == #{data}
-	</if>
-
-	<if test="id == 'e'">
-		SELECT email FROM member
-		where email == #{data}
-	</if>
+	<select id="isDuplicated" resultType="map">
+		SELECT ${nickOrEmailOrId} FROM member 
+		where ${nickOrEmailOrId} = #{data}
 	</select>
 
+	<select id="login" resultType="Member">
+		SELECT user_id FROM member WHERE user_id = #{user_id} and user_password = #{user_password}		
+	</select>
 </mapper>
