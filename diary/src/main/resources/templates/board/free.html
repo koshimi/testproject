@@ -1,21 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<style>
-	div.user_status {
-		border: 1px black solid;
-		width: fit-content;
-		block-size: fit-content;
-	}
-</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Main</h1>
-<div class="user_status">
-	Your nickname : <span th:text="${session.m.nickname}"></span>
-</div>
+<h1>menu</h1>
 <div>
 <a th:href="@{/board/Agora.html}">Agora</a>
 <a th:href="@{/board/free.html}">free</a>

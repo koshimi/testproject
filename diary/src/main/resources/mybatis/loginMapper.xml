@@ -14,6 +14,7 @@
 	</select>
 
 	<select id="login" resultType="Member">
-		SELECT user_id FROM member WHERE user_id = #{user_id} and user_password = #{user_password}		
+		SELECT * FROM member WHERE user_id = #{user_id} and user_password = #{user_password}		
 	</select>
+	
 </mapper>

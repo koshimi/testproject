@@ -6,8 +6,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 
@@ -28,11 +29,14 @@ public class MemberController {
 
 	
 	@PostMapping("/member/login")
-	public String login(Member member, Model model) {
+	public String login(Member member, Model model, HttpServletRequest request) {
 		member = mapper.login(member);
 		if (member == null) {
 			return "redirect:/member/loginform";
 		}
+		
+		var session = request.getSession();
+		session.setAttribute("m", member);
 		
 		return "board/menu";
 	}
@@ -47,7 +51,7 @@ public class MemberController {
 	public String register(@Validated Member member, BindingResult result, Model model) {
 		
 		if (result.hasErrors()) {
-			model.addAttribute("Member",member);
+			model.addAttribute("MemberRegister",member);
 			return "member/registerform";
 		} else {
 			if (0 < mapper.registerUser(member)) {

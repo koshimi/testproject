@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Agora</h1>
+	<div>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>seq</th>
+					<th>nickname</th>
+					<th>title</th>
+					<th>date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${boards.empty}">
+					<td colspan="2">No Boards Available</td>
+				</tr>
+				<tr th:each="board : ${boards}">
+					<td><span th:text="${board.seq}"> seq </span></td>
+					<td><span th:text="${board.nickname}"> nickname </span></td>
+					<td><span th:text="${board.title}"> Title </span></td>
+					<td><span th:text="${board.date}"> date</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
