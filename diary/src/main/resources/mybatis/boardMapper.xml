@@ -24,5 +24,4 @@
 	<update id="modifyBoard">
 		UPDATE agora SET title = #{title}, content = #{content} WHERE seq = #{seq};
 	</update>
-
 </mapper>

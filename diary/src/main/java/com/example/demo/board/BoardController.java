@@ -21,6 +21,12 @@ public class BoardController {
 		model.addAttribute("boards", list);
 		return "board/agora";
 	}
+	@GetMapping("/board/getBoard")
+	public String getAgora(Model model, int seq) {
+		var list = mapper.getBoard(seq);
+		model.addAttribute("board", list);
+		return "board/agoraDetail";
+	}
 	
 	@GetMapping("/board/insertBoardForm")
 	public String insertBoardForm(Model model,HttpServletRequest request) {
@@ -33,7 +39,9 @@ public class BoardController {
 	@PostMapping("/board/insertBoard")
 	public String insertBoard(Board board,HttpServletRequest request) {
 		board.setNickname((String)request.getSession().getAttribute("nickname"));
+		System.out.println(board.getCreate_at());
 		mapper.insertBoard(board);
+		
 		return "redirect:/board/agora";
 	}
 }

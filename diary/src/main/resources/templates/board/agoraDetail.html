@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div>
+		<span th:text="|nickname : ${board.nickname}|"></span><br>	
+		<span th:text="|date : ${board.create_at}|"></span>		
+		<h1 th:text="${board.title}"></h1>
+		<textarea rows="10" cols="50" th:text="${board.content}"></textarea>
+	</div>
+</body>
+</html>
