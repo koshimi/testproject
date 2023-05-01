@@ -10,11 +10,10 @@ public interface BoardMapper {
 	
 	public Board getBoard(int seq);
 //	@Select("SELECT * FROM agora")
-	public List<Board> getBoardList(Board board);
+	public List<Board> getBoardList();
 	
 	public int insertBoard(Board board);
 	
 	public int updateBoard(Board board);
-	
 	
 }

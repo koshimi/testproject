@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/board/insertBoard" method="post" th:object="${board}">
+	<table>
+			<thead>
+				<tr>
+					<td>nickname : </td>
+					<td th:field="*{nickname}" th:text="${session.nickname}"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>title : </td>
+				</tr>
+				<tr>
+					<td><input th:field="*{title}"></td>
+				</tr>
+				<tr>
+					<td>content : </td>
+				</tr>
+				<tr>
+					<td><textarea th:field="*{content}"></textarea></td> 
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"><input type="submit" value="add subject"></td>
+				</tr>
+			</tfoot>
+		</table>
+</form>
+</body>
+</html>

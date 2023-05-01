@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<style type="text/css">
+	div.agora {
+		
+	}
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>Agora</h1>
-	<div>
+	<div class="agora">
 		<table border="1">
 			<thead>
 				<tr>
@@ -18,15 +24,22 @@
 			</thead>
 			<tbody>
 				<tr th:if="${boards.empty}">
-					<td colspan="2">No Boards Available</td>
+					<td colspan="4">No Boards Available</td>
 				</tr>
 				<tr th:each="board : ${boards}">
 					<td><span th:text="${board.seq}"> seq </span></td>
 					<td><span th:text="${board.nickname}"> nickname </span></td>
-					<td><span th:text="${board.title}"> Title </span></td>
-					<td><span th:text="${board.date}"> date</span></td>
+					<td><a th:href="@{/board/getBoard(seq = ${board.seq})}" th:text="${board.title}"></a></td>
+					<td><span th:text="${board.create_at}"> date</span></td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"><input type="button" onclick="location.href='/board/insertBoardForm'" value="add subject"></td>
+				</tr>
+				
+			
+			</tfoot>
 		</table>
 	</div>
 </body>

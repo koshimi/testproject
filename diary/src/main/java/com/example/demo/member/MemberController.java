@@ -36,7 +36,7 @@ public class MemberController {
 		}
 		
 		var session = request.getSession();
-		session.setAttribute("m", member);
+		session.setAttribute("nickname", member.getNickname());
 		
 		return "board/menu";
 	}

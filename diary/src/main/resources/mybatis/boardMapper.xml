@@ -10,6 +10,19 @@
 	</select>
 	<select id="getBoardList" resultType="Board">
 		SELECT * FROM agora
-		
 	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO agora (nickname, title, content, create_at) 
+		VALUE (#{nickname}, #{title},#{content}, SYSDATE())
+	</insert>
+	
+	<update id="deleteBoard">
+		UPDATE agora SET d_flag = 'Y' WHERE seq = #{seq};
+	</update>
+	
+	<update id="modifyBoard">
+		UPDATE agora SET title = #{title}, content = #{content} WHERE seq = #{seq};
+	</update>
+
 </mapper>
